@@ -161,12 +161,23 @@ router.post('/addOrder', bodyParserJSON, function (req, res) {
         }
     });
 });
-router.get('/listOrders',function(req,res){
-    orderModel.find({},function(err,result){
+router.get('/productDelete/:id',function(req,resp){
+    productModel.remove({_id:req.params.id},function(err,result){
         if(!err){
-            res.json(result);
+            //req.flash("msg","deleted");
+            resp.redirect("/admin/allProducts");
         }else{
-            res.json(err);
+            resp.json(err);
+        }
+    });
+});
+router.get('/userDelete/:id',function(req,resp){
+    userModel.remove({_id:req.params.id},function(err,result){
+        if(!err){
+            //req.flash("msg","deleted");
+            resp.redirect("/admin/allUsers");
+        }else{
+            resp.json(err);
         }
     });
 });

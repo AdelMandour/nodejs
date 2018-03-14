@@ -1,4 +1,104 @@
-<%include ../layouts/header.ejs%>
+<html>
+    <head><title>Add User</title>
+    <link href="/css/style.css" rel="stylesheet" />
+    <script src="/js/jquery-3.2.1.js"></script>
+    <script>
+        var usernameflag=0;
+        var emailflag=0;
+        var passwordflag=0;
+        var confirmflag=0;
+        var roomflag=0;
+        var extflag=0;
+        var imageflag=0;
+        $(function(){
+            $('input[name=username]').keypress(function(event){
+                if(!isNaN(event.key)){
+                    usernameflag=0;
+                    $("#wrong_usrename").text("wrong username");
+                    event.preventDefault();
+                }else{
+                    usernameflag=1;
+                    $("#wrong_usrename").text("")
+                }
+            });
+            $('input[name=room]').keypress(function(event){
+                if(isNaN(event.key)){
+                    roomflag=0;
+                    $("#wrong_room").text("wrong room")
+                    event.preventDefault();
+                }else{
+                    roomflag=1;
+                    $("#wrong_room").text("")
+                }
+            });
+            $('input[name=confirmpassword]').keyup(function(event){
+                if($('input[name=password]').val()!=$('input[name=confirmpassword]').val()){
+                    confirmflag=0;
+                    $("#wrong_password").text("wrong password")
+                }else{
+                    confirmflag=1;
+                    $("#wrong_password").text("")
+                }
+            });
+            $('input[name=ext]').keypress(function(event){
+                if(isNaN(event.key)){
+                    extflag=0;
+                    $("#wrong_ext").text("wrong ")
+                    event.preventDefault();
+                }else{
+                    extflag=1;
+                    $("#wrong_ext").text("")
+                }
+            });
+            $("input[name=image]").on('click',function(){
+                imageflag=1;
+            });
+            if($("input[name=image]").val()==""){
+                    imageflag=0;
+                    console.log(0)
+            }else{
+                imageflag=1;
+                console.log(1)
+            }
+            $("input[name=username]").prop('required',true)
+            $("input[name=password]").prop('required',true)
+            $("input[name=confirmpassword]").prop('required',true)
+            $("input[name=email]").prop('required',true)
+            $("input[name=room]").prop('required',true)
+            $("input[name=ext]").prop('required',true)
+            $("input[name=image]").prop('required',true)
+        });
+    </script>
+    </head>
+    <body>
+        <!-- start header -->
+        <div id="header">
+         <div id="header-container">
+                <a href="home.html" id="logo"><img src="/imgs/ka.png" alt="logo" width="70" height="70" /></a>
+                <input type="text" placeholder="search" />
+                <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="/admin/allProducts">Prouducts</a></li>
+                        <li><a href="/admin/addProduct">add Prouduct</a></li>
+                        <li><a href="/admin/allUsers">Users</a></li>
+                        <li><a href="/admin/addUser">add User</a></li>
+                        <li><a href="/admin/addRoom">add room</a></li>
+                        <li><a href="/admin/addCategory">add Category</a></li>
+                        <li><a href="/admin/addToUser">Manual Order</a></li>
+                        <li><a href="/admin/orders">Orders</a></li>
+                        <li><a href="#">Checks</a></li>
+                        <li>
+                            <a href="register.html">
+                                <img class="profImg" src="/imgs/min3.jpg" />
+                            </a>
+                        </li>
+                        <li><a href="/auth/logout" class="sign">Logout</a></li>
+                        
+                    </ul>
+          </div>
+        </div>
+        <!-- end header -->
+        
     <!-- start content-->
     <div id="contact">
         <div id="content-container">
@@ -6,12 +106,17 @@
                 <h1>Add User</h1>
                 <form action="/admin/addUser" method="POST" enctype="multipart/form-data">
                     <input type="text" name="username" placeholder="write your name" />
+                    <span id='wrong_username'></span>
                     <input type="email" name="email" placeholder="write your email" />
                     <input type="password" name="password" placeholder="password" />
-                    <input type="password" placeholder="confirm password" />
+                    <input type="password" name="confirmpassword" placeholder="confirm password" />
+                    <span id='wrong_password'></span>
                     <input type="text" name="room" placeholder="room" />
+                    <span id='wrong_room'></span>
                     <input type="text" name="ext" placeholder="Ext" />
+                    <span id='wrong_Ext'></span>
                     <input name="image" type="file" />
+                    <span id='wrong_image'></span>
                     <input type="submit" name="submit" value="save" />
                     <input type="reset" value="reset" />
                 </form>
@@ -20,6 +125,4 @@
     </div>
 
     <!-- start content-->
-
-
     <%include ../layouts/footer.ejs%>
