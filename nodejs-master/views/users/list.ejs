@@ -1,0 +1,26 @@
+<%include ../layouts/header.ejs%>
+<%if(msg!=''){%>
+    <h2><%=msg%></h2>
+<%}%>
+<table style="border:2px solid black">
+    <tr style="border:2px solid black">
+        <th style="border:2px solid black">id</th>
+        <th style="border:2px solid black">title</th>
+        <th style="border:2px solid black">action</th>
+    </tr>
+    <%data.forEach(function(user){%>
+        <tr style="border:2px solid black">
+            <td style="border:2px solid black">
+                <%= user._id%>
+            </td>
+            <td style="border:2px solid black">
+                <%=user.name%>
+            </td>
+            <td style="border:2px solid black">
+                <a href="/users/delete/<%=user._id%>">delete</a>
+                <a href="/users/edit/<%=user._id%>">edit</a>
+            </td>
+        </tr>
+    <%})%>
+</table>
+<%include ../layouts/footer.ejs%>

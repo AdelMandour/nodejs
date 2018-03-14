@@ -1,0 +1,157 @@
+<html>
+
+<head>
+    <title>Products</title>
+    <link href="/css/style.css" rel="stylesheet" />
+    <script src="/js/jquery-3.2.1.js"></script>
+    <script>
+        $(function(){
+            $(".products").one('click',function(){
+                //console.log(this.name);
+                $('#products').append("<label style='margin-right:2px;marign-left:-3px' class='component'> "+this.name+" </label>");
+                $('#products').append("<input id='I"+this.name+"'name='"+this.name+"' type='text' style='margin-right:2px' value='1'/>");
+                $('#products').append("<button class='plus' name='"+this.name+"' style='margin-right:2px'> + </button>");
+                $('#products').append("<button class='mins' name='"+this.name+"' style='margin-right:2px'> - </button>");
+                $('#products').append("<label style='margin-right:2px' title='"+this.title+"' id='L"+this.name+"'>EGP "+this.title+" </label>");
+                let totalPrice=parseInt($("#total").text().split(' ')[2]);
+                let newtotal=parseInt(this.title)+totalPrice;
+                $("#total").text("Total price "+newtotal);
+            });
+            $("#products").on('click','.plus',function(){
+                var text=parseInt($("#I"+this.name).val())
+                price=parseInt($("#L"+this.name)[0].title);
+                $("#I"+this.name).val(++text);
+                text2=parseInt($("#L"+this.name).text().split(' ')[1]);
+                text2+=price;
+                $("#L"+this.name).text("EGP "+text2);
+                let totalPrice=parseInt($("#total").text().split(' ')[2]);
+                totalPrice+=price;
+                $("#total").text("Total price "+totalPrice);
+            });
+            $("#products").on('click','.mins',function(){
+                var text=parseInt($("#I"+this.name).val())
+                if(text>1){
+                $("#I"+this.name).val(--text);
+                text2=parseInt($("#L"+this.name).text().split(' ')[1]);
+                price=parseInt($("#L"+this.name)[0].title);
+                text2-=price;
+                $("#L"+this.name).text("EGP "+text2);
+                let totalPrice=parseInt($("#total").text().split(' ')[2]);
+                totalPrice-=price;
+                $("#total").text("Total price "+totalPrice);
+                }
+            });
+            $("#submit").on('click',function(){
+                var ordercomponents=$(".component").text();
+                var ordertotalprice=parseInt($("#total").text().split(' ')[2]);
+                var ordernotes=$('#notes').val();
+                var RoomNumber=$("select[name='myroom']").val();
+                var orderuser=$("select[name='userorder']").val();
+                var orderext=$("#ext").val();
+                $.ajax({
+                    url:'http://localhost:8080/admin/addOrder',
+                    type:"POST",
+                    contentType:'application/json',
+                    dataType:'json',
+                    // send JSON data with request
+                    data:JSON.stringify({component:ordercomponents,total:ordertotalprice,note:ordernotes,room_numbers:RoomNumber,order_user:orderuser,ext:orderext}),
+                    success:function(response){
+                        //console.log(response);
+                        window.location = "http://localhost:8080/admin/listOrders";
+                    },
+                    error:function(error){
+                    }
+                  })
+            });
+        })
+    </script>
+</head>
+
+<body>
+   <!-- start header -->
+   <div id="header">
+    <div id="header-container">
+           <a href="home.html" id="logo"><img src="/imgs/ka.png" alt="logo" width="70" height="70" /></a>
+           <input type="text" placeholder="search" />
+       <ul>
+           <li><a href="#">Home</a></li>
+           <li><a href="#">Prouducts</a></li>
+           <li><a href="#">Users</a></li>
+           <li><a href="#">Manual Order</a></li>
+           <li><a href="#">Checks</a></li>
+           <li>
+               <a href="register.html">Admin</a>
+           </li>
+           <li>
+               <a href="register.html">
+                   <img class="profImg" src="/imgs/min3.jpg" />
+               </a>
+           </li>
+           <li><a href="#" class="sign">Logout</a></li>
+       </ul>
+     </div>
+   </div>
+   <!-- end header -->
+
+
+    <!-- start content-->
+    <div id="contact">
+        <div id="content-container">
+
+            <div class="homeL">
+                
+                    <div id="products" style="margin-left:-3px"></div>
+                    <br/><br/>
+                    <label>Note</label>
+                    <br/>
+                    <textarea id="notes"></textarea>
+                    <br>
+                    <label>Room</label>
+                    <select name="myroom">
+                        <%rooms.forEach(function(room){%>
+                        <option value="<%=room.roomnumber%>"><%=room.roomnumber%></option>
+                        <%})%>
+                    </select>
+                    <br />
+                    <br/>
+                    <label>Ext</label>
+                    <input type="number" id="ext"/>
+                    <br/>
+                    <br/>
+                    <hr />
+                    <br />
+                    <span id="total">Total Price 0</span>
+                    <br />
+                    <input type="submit" id="submit" value="confirm" />
+            </div>
+            <div class="homeR">
+                <div class="add_to_user">
+                    <label>Add to user</label><br><br>
+                    <select name="userorder"class="user_select sign">
+                        <%users.forEach(function(user){%>
+                            <option value="<%=user.name%>"><%=user.name%></option>
+                            <%})%>
+                    </select>
+                
+                </div>
+                <br />
+                <div class="orderPrice" >
+                    <%data.forEach(function(product){%>
+                    <span>
+                    <button name="<%=product.name%>" title="<%=product.price%>"class="products">
+                    <img src="/imgs/<%=product.image%>" alt="logo" width="70" height="70" /><br />
+                        <span><%=product.name%></span><br/>
+                        <span><%=product.price%> LE</span>
+                    </button>
+                    </span>
+                    <%})%>
+
+                </div>
+                 </div>
+            </div>
+
+        </div>
+
+        <!-- start content-->
+
+<%include ../layouts/footer.ejs%>

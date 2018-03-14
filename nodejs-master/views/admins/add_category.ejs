@@ -1,0 +1,16 @@
+<%include ../layouts/header.ejs%>
+    <!-- start content-->
+    <div id="contact">
+        <div id="content-container">
+            <div id="contact-form">
+                <h1>Add Category</h1>
+                <form action="/admin/addCategory" method="POST">
+                    <input type="text" name="name" placeholder="write category name" />
+                    <input type="submit" name="submit" value="save" />
+                    <input type="reset" value="reset" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- start content-->
+    <%include ../layouts/footer.ejs%>
