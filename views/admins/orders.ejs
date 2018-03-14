@@ -1,0 +1,59 @@
+<%include ../layouts/header.ejs%>
+<div id="order">
+    <div id="content-container">
+
+         <!-- start order now-->
+           <div id="showOrders">
+            <form action="mailto:admin@gmail.com">
+               <table>
+                 <tr>
+                    <th>Order Date</th>
+                    <th>Name</th>
+                    <th>Room</th>
+                    <th>Ext</th>
+                    <th>Action</th>
+                 </tr>
+                 <%orders.forEach(function(order){%>
+                 <tr>
+                    <td><%=order.date%></td>
+                    <td><%=order.name%></td>
+                    <td><%=order.room%></td>
+                    <td><%=order.ext%></td>
+                    <td><a href="/admin/deliverOrder" class="sign">Deliver</a></td>
+
+
+                 </tr>
+                 <%})%>
+
+               </table>
+               <div id="showProducts">
+                  <table>
+                 <%orders.forEach(function(order){%>
+                   <%order.forEach(function(component){%>
+                     <%component.forEach(function(item){%>
+
+                 <tr>
+                    <td><img src="/imgs/<%=item.image%>"/></td>
+                    <td><%=item.name%></td>
+                    <td><%=item.price%></td>
+                </tr>
+                <%})%>
+                <tr>
+                  <td><%=order.totalprice%></td>
+                </tr>
+                <%})%>
+                <%})%>
+
+                 </table>
+
+               </div>
+
+            </form>
+           </div>
+
+    </div>
+
+</div>
+
+
+<%include ../layouts/footer.ejs%>

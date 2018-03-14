@@ -170,4 +170,15 @@ router.get('/listOrders',function(req,res){
         }
     });
 });
+
+router.get('/orders',function(req,resp){
+    orderModel.find({},function(err,result){
+        if(!err){
+            resp.render('admins/orders',{orders:result});
+        }else{
+            resp.json(err);
+        }
+    });
+});
+
 module.exports = router;
