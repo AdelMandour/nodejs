@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <title>Login</title>
+    <link href="/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- start header -->
+    <div id="header">
+        <div id="header-container">
+            <a href="home.html" id="logo">
+                <img src="/imgs/ka.png" alt="logo" width="70" height="70" />
+            </a>
+            <input type="text" placeholder="search" />
+            <ul>
+            </ul>
+        </div>
+    </div>
+    <!-- end header -->
+
+    <!-- start content-->
+    <div id="Register">
+        <div id="content-container">
+            <div id="logform">
+                <h1>Login</h1>
+                <%if(message){%>
+                    <h1>
+                        <%=message%>
+                    </h1>
+                    <%}%>
+                        <form action="/auth/login" method="post">
+                            <input type="text" name="username" />
+                            <input type="password" name="password" />
+                            <input type="submit" value="login" />
+                        </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- start content-->
+
+    <%include ../layouts/footer.ejs%>

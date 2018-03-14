@@ -1,0 +1,16 @@
+<%include ../layouts/header.ejs%>
+    <!-- start content-->
+    <div id="contact">
+        <div id="content-container">
+            <div id="contact-form">
+                <h1>Add Room</h1>
+                <form action="/admin/addRoom" method="POST">
+                    <input type="text" name="roomnumber" placeholder="write Room number" />
+                    <input type="submit" name="submit" value="save" />
+                    <input type="reset" value="reset" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- start content-->
+    <%include ../layouts/footer.ejs%>
