@@ -1,0 +1,38 @@
+<%include ../layouts/header.ejs%>
+        <!-- start content-->
+        <div id="about">
+            <div id="content-container">
+                 <!-- start order now-->
+                   <div id="order-now">
+                    <form action="mailto:admin@gmail.com">
+                       <table>
+                         <tr>
+                            <th>photo</th>
+                            <th>Name</th>
+                            <th>Room</th>
+                            <th>Ext</th>
+                            <th>Action</th>
+                         </tr>
+                         <!-- start row-->
+                         <%data.forEach(function(user){%>
+                         <tr>
+                            <td><img src="/imgs/<%=user.image%>" /></td>
+                            <td><%=user.name%></td>
+                            <td><%=user.room%></td>
+                            <td><%=user.ext%></td>
+                            <td><a class="sign">edit</a>&nbsp;<a class="sign">Delete</a></td>
+                         </tr>
+                         <%})%>
+                          <!-- end row-->
+                         
+                       </table>
+                    </form>
+                   </div>
+                <!-- end order now-->
+                
+            </div>
+            
+        </div>
+        
+        <!-- start content-->
+<%include ../layouts/footer.ejs%>

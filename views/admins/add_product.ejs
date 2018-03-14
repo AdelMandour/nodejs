@@ -1,0 +1,31 @@
+<%include ../layouts/header.ejs%>
+        <!-- start content-->
+        <div id="contact">
+            <div id="content-container">
+                   <div id="contact-form">
+                    <h1>Add Product</h1>
+                    <form action="/admin/addProduct" method="POST" enctype="multipart/form-data">
+                        <input type="text" name="product" placeholder="product name" />
+                        <input type="text" name="price" placeholder="price" />
+                        <label>Category</label>
+                    <select name="category" class="select">
+                        <%cats.forEach(function(c){%>
+                        <option value="<%=c.name%>"><%=c.name%></option>
+                        <%})%>
+                    </select>
+                    <br/>
+                    <br/>
+                    <a href="/admin/addCategory" class="sign">Add Categoty</a><br /><br>
+                        <label>Product Picture</label>
+                        <input name="image" type="file" />
+                        <input type="submit" name="save" value="save" class="save"/>
+                        <input type="reset" value="reset" />
+                    </form>
+                   </div>
+                
+                
+            </div>
+            
+        </div>
+        <!-- start content-->
+<%include ../layouts/footer.ejs%>

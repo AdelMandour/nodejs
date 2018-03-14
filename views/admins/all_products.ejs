@@ -1,0 +1,41 @@
+<%include ../layouts/header.ejs%>
+        <!-- start content-->
+        <div id="about">
+            <div id="content-container">
+                
+                 <!-- start order now-->
+                   <div id="order-now">
+                    <form action="mailto:admin@gmail.com">
+                       <table>
+                         <tr>
+                            <th>photo</th>
+                            <th>product Name</th>
+                            <th>category</th>
+                            <th>Price</th>
+                         </tr>
+                         <!-- start row-->
+                         <%products.forEach(function(product){%>
+                         <tr>
+                            <td><img src="/imgs/<%=product.image%>"/></td>
+                            <td><%=product.name%></td>
+                            <td><%=product.category%></td>
+                            <td><%=product.price%></td>
+                         </tr>
+                         <%})%>
+                          <!-- end row-->
+
+                       </table>
+                       
+                    
+                    
+                    </form>
+                   </div>
+                <!-- end order now-->
+                
+            </div>
+            
+        </div>
+        
+        <!-- start content-->
+        
+        <%include ../layouts/footer.ejs%>

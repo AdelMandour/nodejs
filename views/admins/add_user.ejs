@@ -1,0 +1,25 @@
+<%include ../layouts/header.ejs%>
+    <!-- start content-->
+    <div id="contact">
+        <div id="content-container">
+            <div id="contact-form">
+                <h1>Add User</h1>
+                <form action="/admin/addUser" method="POST" enctype="multipart/form-data">
+                    <input type="text" name="username" placeholder="write your name" />
+                    <input type="email" name="email" placeholder="write your email" />
+                    <input type="password" name="password" placeholder="password" />
+                    <input type="password" placeholder="confirm password" />
+                    <input type="text" name="room" placeholder="room" />
+                    <input type="text" name="ext" placeholder="Ext" />
+                    <input name="image" type="file" />
+                    <input type="submit" name="submit" value="save" />
+                    <input type="reset" value="reset" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- start content-->
+
+
+    <%include ../layouts/footer.ejs%>

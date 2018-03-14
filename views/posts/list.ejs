@@ -1,0 +1,39 @@
+<%include ../layouts/header.ejs%>
+<%if(msg!=''){%>
+    <h2><%=msg%></h2>
+<%}%>
+<form action="/posts/search">
+    <input type="text" name="keyword"/>
+    <input type="submit" value="search"/>
+</form>
+<br/>
+<table style="border:2px solid black">
+    <tr style="border:2px solid black">
+        <th style="border:2px solid black">id</th>
+        <th style="border:2px solid black">title</th>
+        <th style="border:2px solid black">auther</th>
+        <th style="border:2px solid black">image</th>
+        <th style="border:2px solid black">action</th>
+    </tr>
+    <%data.forEach(function(post){%>
+        <tr style="border:2px solid black">
+            <td style="border:2px solid black">
+                <%= post._id%>
+            </td>
+            <td style="border:2px solid black">
+                <%=post.title%>
+            </td>
+            <td style="border:2px solid black">
+                <%=post.user.name%>
+            </td>
+            <td style="border:2px solid black">
+                <img src="/imgs/<%=post.image%>" width="50" height="50" alt="">
+            </td>
+            <td style="border:2px solid black">
+                <a href="/posts/delete/<%=post._id%>">delete</a>
+                <a href="/posts/edit/<%=post._id%>">edit</a>
+            </td>
+        </tr>
+    <%})%>
+</table>
+<%include ../layouts/footer.ejs%>
