@@ -40,6 +40,7 @@
                             <th>Name</th>
                             <th>Room</th>
                             <th>Ext</th>
+                            <th>type</th>
                             <th>Action</th>
                          </tr>
                          <!-- start row-->
@@ -49,7 +50,8 @@
                             <td><%=user.name%></td>
                             <td><%=user.room%></td>
                             <td><%=user.ext%></td>
-                            <td><a class="sign">edit</a>&nbsp;<a class="sign" href="/admin/userDelete/<%=user._id%>">Delete</a></td>
+                            <td><%=user.type%></td>
+                            <td><a class="sign" href="/admin/userDelete/<%=user._id%>">Delete</a></td>
                          </tr>
                          <%})%>
                           <!-- end row-->

@@ -51,24 +51,31 @@
                  RoomNumber=$("select[name='myroom']").val();
                  orderuser=$("select[name='userorder']").val();
                  orderext=$("#ext").val();
-                if(ordercomponents&&ordertotalprice&&ordernotes&&RoomNumber&&orderuser&&orderext){
-                    e.preventDefault();
-                }else{
+                //if(ordercomponents&&ordertotalprice&&ordernotes&&RoomNumber&&orderuser&&orderext){
+                   // e.preventDefault();
+                //}else{
                 $.ajax({
-                    url:'http://localhost:8080/admin/addOrder',
+                    url:'/admin/addOrder',
                     type:"POST",
                     contentType:'application/json',
                     dataType:'json',
                     // send JSON data with request
                     data:JSON.stringify({component:ordercomponents,total:ordertotalprice,note:ordernotes,room_numbers:RoomNumber,order_user:orderuser,ext:orderext}),
+                    complete: function() {
+                        //called when complete
+                        console.log('process complete');
+                      },
                     success:function(response){
-                        //console.log(response);
+                        console.log(response);
+                        console.log('process sucess');
                         window.location = "http://localhost:8080/admin/orders";
                     },
                     error:function(error){
+                        console.log(error);
+                        console.log('process error');
                     }
                   })
-                }
+               // }
             });
         
         })

@@ -2,12 +2,16 @@ var mongoose=require('mongoose');
 var mongoosePaginate=require('mongoose-paginate');
 var Schema=mongoose.Schema;
 var users=new Schema({
-name:String,
+name:{
+    type:String,
+    unique: true
+},
 email:String,
 password:String,
 room:Number,
 ext:Number,
-image:String
+image:String,
+type:String
 });
 // users.plugin(mongoosePaginate);
 // users.pre('save',function(next){

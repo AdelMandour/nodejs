@@ -2,7 +2,7 @@ var mongoose=require('mongoose');
 var Schema=mongoose.Schema;
 var orders=new Schema({
 name:String,
-component:String,
+component:Object,
 notes:String,
 room:{
     type:Number,

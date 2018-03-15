@@ -23,6 +23,7 @@ router.post('/addUser', uploadMid.single('image'), function (req, resp) {
         password: req.body.password,
         room: req.body.room,
         ext: req.body.ext,
+        type:req.body.type,
         image: req.file.filename
     });
     user.save(function (err, doc) {
@@ -107,17 +108,17 @@ router.get('/addToUser', function (req, res) {
             res.json(err);
         }
     });
-    roomModel.find({}, function (err, result) {
+    roomModel.find({}, function (err, result1) {
         if (!err) {
-            roomNumber = result;
+            roomNumber = result1;
         } else {
             res.json(err);
         }
     });
-    productModel.find({}, function (err, result) {
+    productModel.find({}, function (err, result2) {
         if (!err) {
             res.render('admins/add_to_user', {
-                data: result,
+                data: result2,
                 users: usersdata,
                 rooms: roomNumber
             });
@@ -143,23 +144,44 @@ router.post('/addRoom', bodyParserMid, function (req, resp) {
     });
 });
 router.post('/addOrder', bodyParserJSON, function (req, res) {
-    var order = new orderModel({
-        name: req.body.order_user,
-        component:req.body.component,
-        notes: req.body.note,
-        room: req.body.room_numbers,
-        totalprice: req.body.total,
-        date:Date.now(),
-        status: "inprocessing",
-        ext: req.body.ext
-    });
-    order.save(function(err,doc){
-        if(!err){
-            res.redirect("/admin/listOrders");
-        }else{
-            res.json(err);
+    var mycomponent=[];
+    var usercomponent=[];
+    //console.log(req.body.component);
+    var userordercomponent=req.body.component.split(" ");
+    //console.log(ordercomponent);
+    userordercomponent.forEach(element => {
+        if(element){
+            //console.log(element)
+            mycomponent[mycomponent.length]=element;
+            console.log(mycomponent);
         }
     });
+        productModel.find({name:{$in:mycomponent}},function(err,result){
+            if(!err){
+                usercomponent=result;
+                console.log(usercomponent)
+                 var order = new orderModel({
+                    name: req.body.order_user,
+                    component:result,
+                    notes: req.body.note,
+                    room: req.body.room_numbers,
+                    totalprice: req.body.total,
+                    date:Date.now(),
+                    status: "inprocessing",
+                    ext: req.body.ext
+                    });
+                    order.save(function(error,doc){
+                        if(!error){
+                            console.log(doc);
+                            res.json(doc)
+                        }else{
+                            res.json(error)
+                        }
+                    });
+            }else{
+                res.json(err);
+            }
+        });      
 });
 router.get('/productDelete/:id',function(req,resp){
     productModel.remove({_id:req.params.id},function(err,result){
