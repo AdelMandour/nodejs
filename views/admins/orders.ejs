@@ -1,59 +1,87 @@
-<%include ../layouts/header.ejs%>
-<div id="order">
-    <div id="content-container">
+<html>
+    <head><title>Add User</title>
+    <link href="/css/style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- start header -->
+        <div id="header">
+         <div id="header-container">
+                <a href="home.html" id="logo"><img src="/imgs/ka.png" alt="logo" width="70" height="70" /></a>
+                <input type="text" placeholder="search" />
+                <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="/admin/allProducts">Prouducts</a></li>
+                        <li><a href="/admin/addProduct">add Prouduct</a></li>
+                        <li><a href="/admin/allUsers">Users</a></li>
+                        <li><a href="/admin/addUser">add User</a></li>
+                        <li><a href="/admin/addRoom">add room</a></li>
+                        <li><a href="/admin/addCategory">add Category</a></li>
+                        <li><a href="/admin/addToUser">Manual Order</a></li>
+                        <li><a href="/admin/orders">Orders</a></li>
+                        <li><a href="#">Checks</a></li>
+                        <li>
+                            <a href="register.html">
+                                <img class="profImg" src="/imgs/min3.jpg" />
+                            </a>
+                        </li>
+                        <li><a href="/auth/logout" class="sign">Logout</a></li>
 
-         <!-- start order now-->
-           <div id="showOrders">
-            <form action="mailto:admin@gmail.com">
-               <table>
-                 <tr>
-                    <th>Order Date</th>
-                    <th>Name</th>
-                    <th>Room</th>
-                    <th>Ext</th>
-                    <th>Action</th>
-                 </tr>
-                 <%orders.forEach(function(order){%>
-                 <tr>
-                    <td><%=order.date%></td>
-                    <td><%=order.name%></td>
-                    <td><%=order.room%></td>
-                    <td><%=order.ext%></td>
-                    <td><a href="/admin/deliverOrder" class="sign">Deliver</a></td>
+                    </ul>
+          </div>
+        </div>
+        <!-- end header -->        <!-- start content-->
+        <div id="about">
+            <div id="content-container">
+
+                 <!-- start order now-->
+                   <div id="order-now">
+                    <form action="mailto:admin@gmail.com">
+                       <table>
+                         <tr>
+                           <th>Order Date</th>
+                           <th>Name</th>
+                           <th>Room</th>
+                           <th>Ext</th>
+                           <th>Action</th>
+                         </tr>
+                         <!-- start row-->
+                         <%orders.forEach(function(order){%>
+                         <tr>
+                           <td><%=order.date%></td>
+                           <td><%=order.name%></td>
+                           <td><%=order.room%></td>
+                           <td><%=order.ext%></td>
+                           <td><a href="/admin/deliverOrder" class="sign">Deliver</a></td>
+                          </tr>
+                           <%})%>
+                           <hr>
+                           <%orders.forEach(function(order){%>
+                             <%order.component.forEach(function(item){%>
+                               <tr>
+                                 <td><img src="/imgs/<%=item.image%>"/></td>
+                                 <td><%=item.price%></td>
+                                 </tr>
+                                 <%})%>
+                                 <tr>
+                                    <td><%=order.totalprice%></td>
+                                 </tr>
+
+                         <%})%>
+
+                       </table>
 
 
-                 </tr>
-                 <%})%>
 
-               </table>
-               <div id="showProducts">
-                  <table>
-                 <%orders.forEach(function(order){%>
-                   <%order.forEach(function(component){%>
-                     <%component.forEach(function(item){%>
+                    </form>
+                   </div>
+                <!-- end order now-->
 
-                 <tr>
-                    <td><img src="/imgs/<%=item.image%>"/></td>
-                    <td><%=item.name%></td>
-                    <td><%=item.price%></td>
-                </tr>
-                <%})%>
-                <tr>
-                  <td><%=order.totalprice%></td>
-                </tr>
-                <%})%>
-                <%})%>
+            </div>
 
-                 </table>
+        </div>
 
-               </div>
+        <!-- start content-->
 
-            </form>
-           </div>
-
-    </div>
-
-</div>
-
+        <%include ../layouts/footer.ejs%>
 
 <%include ../layouts/footer.ejs%>
