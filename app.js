@@ -9,6 +9,7 @@ var authRoutes=require('./controllers/auth');
 var postsRoutes=require('./controllers/posts');
 var usersRoutes=require('./controllers/users');
 var adminRoutes=require('./controllers/admin');
+var orderRoutes=require("./controllers/order");
 var session=require('express-session');
 var flash=require('connect-flash');
 var mongoose=require('mongoose');
@@ -21,21 +22,22 @@ server.use(flash());
 server.set("view engine","ejs");
 server.set("views",'./views');
 server.use(express.static('public'));
-server.use('/auth',authRoutes);
-server.use(function(req,resp,next){
-    if(!(req.session.username&&req.session.password)){
-        resp.redirect("/auth/login");
-    }else{
-        resp.locals={
-            name:req.session.username
-        }
-        next();
-    }
-});
+// server.use('/auth',authRoutes);
+// server.use(function(req,resp,next){
+//     if(!(req.session.username&&req.session.password)){
+//         resp.redirect("/auth/login");
+//     }else{
+//         resp.locals={
+//             name:req.session.username
+//         }
+//         next();
+//     }
+// });
 
 server.use('/posts',postsRoutes);
 server.use('/users',usersRoutes);
 server.use('/admin',adminRoutes);
+server.use('/order',orderRoutes);
 server.listen(8080,function(){
     console.log("started 8080....");
 });
