@@ -14,6 +14,7 @@ date:{
     default:Date.now
 },
 status:String,
-ext:Number
+ext:Number,
+amount:Number
 });
 mongoose.model("orders",orders);
