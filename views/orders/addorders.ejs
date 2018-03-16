@@ -1,0 +1,52 @@
+<%include ../layouts/header.ejs%>
+        <!-- start content-->
+
+
+                      <div id="container">
+
+                          <div id="leftdiv">
+                      <form action="/order/add" method="POST" enctype="multipart/form-data">
+                      <div id="smallcontainer" ></div>
+                      <input type="text" name="component" class="h" id="component">
+                      <input type="text" name="amount" class="h" id="mount">
+
+
+                      <h3>notes</h3><br><input type="text" style="width:200px; height:80px;" name="notes"><br>
+
+                      ROOM <select name="room">
+                        <%rooms.forEach(function(room){%>
+                          <option value="<%=room.roomnumber%>"><%=room.roomnumber%></option>
+                               <%})%>
+                        </select><br><br>
+                        <hr>
+                        <span class="total">Total Price</span><input type="text" id="totalprice" name="totalprice"/><br><br>
+
+                        <input type="submit" value="confirm" class="submitt">
+                      </form>
+                      </div>
+
+
+                          <div class="rightdiv">
+                            <div class="topdiv">last order
+
+                            </div>
+                            <div class="buttomdiv" >
+
+                           <%products.forEach(function(product){%>
+                      <div class="product">
+                        <img src="/imgs/<%=product.image%>" class="coffee"/>
+                         <br>
+                          <span class="nameiteam"><%=product.name%></span><br>
+                          price: <span class="price"><%=product.price%></span>
+                      </div>
+                       <%})%>
+                     </div>
+
+                          </div>
+
+
+
+
+        </div>
+        <!-- start content-->
+<%include ../layouts/footer.ejs%>

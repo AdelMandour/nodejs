@@ -71,4 +71,78 @@ router.post('/edit/:id',[bodyParserMid],function(req,resp){
         }
    });
 });
+
+
+router.get('/allOrders',function(req,resp){
+    var orders_user_name=req.session.username;
+    orderModel=mongoose.model('orders');
+    orderModel.find({'name':orders_user_name},function(err,result){
+        if(!err){
+            //res.json(result);
+            resp.render('users/allOrders',{orders:result});
+        }else{
+            res.json(err);
+        }
+    });
+   
+
+});
+
+
+
+
+
+router.post('/allOrders',[bodyParserMid],function(req,resp){
+    var dateFrom=req.body.dateFrom;
+    var dateTo=req.body.dateTo;
+    var orders_user_name=req.session.username;
+    orderModel=mongoose.model('orders');
+    var today = new Date(dateFrom);
+    var today1=today.toISOString();
+    var today2 = new Date(dateTo);
+    // var tt=new Date(dateTo);
+    // var today2=new Date();
+    // today2.setDate(tt.getDate()+1);
+    var sec=today2.toISOString();
+    //console.log(today.toString());
+    console.log(today1);
+    console.log(sec);
+    // console.log(dateFrom);
+    // console.log(dateTo);
+
+    
+    orderModel.find({
+        date: {
+            $gte:today1,
+            $lte:sec
+        }
+        ,name:orders_user_name
+    },function(err,result){
+        if(!err){
+            //res.json(result);
+            resp.render('users/allOrders2',{dates:result});
+            //console.log(result);
+        }else{
+            res.json(err);
+        }
+
+    });
+
+    
+    orderModel.find({'name':orders_user_name},function(err,result){
+        if(!err){
+            //res.json(result);
+            resp.render('users/allOrders',{orders:result});
+        }else{
+            res.json(err);
+        }
+    });
+   
+
+});
+
+
+
+
+
 module.exports=router;

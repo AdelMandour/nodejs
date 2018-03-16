@@ -9,6 +9,7 @@ var authRoutes=require('./controllers/auth');
 var postsRoutes=require('./controllers/posts');
 var usersRoutes=require('./controllers/users');
 var adminRoutes=require('./controllers/admin');
+var orderRoutes=require("./controllers/order");
 var session=require('express-session');
 var flash=require('connect-flash');
 var mongoose=require('mongoose');
@@ -36,6 +37,7 @@ server.use(function(req,resp,next){
 server.use('/posts',postsRoutes);
 server.use('/users',usersRoutes);
 server.use('/admin',adminRoutes);
+server.use('/order',orderRoutes);
 server.listen(8080,function(){
     console.log("started 8080....");
 });
