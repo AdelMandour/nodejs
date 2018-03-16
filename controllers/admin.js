@@ -168,7 +168,8 @@ router.post('/addOrder', bodyParserJSON, function (req, res) {
                     totalprice: req.body.total,
                     date:Date.now(),
                     status: "inprocessing",
-                    ext: req.body.ext
+                    ext: req.body.ext,
+                    amount:req.body.amount
                     });
                     order.save(function(error,doc){
                         if(!error){
