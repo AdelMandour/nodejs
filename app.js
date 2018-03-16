@@ -22,17 +22,17 @@ server.use(flash());
 server.set("view engine","ejs");
 server.set("views",'./views');
 server.use(express.static('public'));
-// server.use('/auth',authRoutes);
-// server.use(function(req,resp,next){
-//     if(!(req.session.username&&req.session.password)){
-//         resp.redirect("/auth/login");
-//     }else{
-//         resp.locals={
-//             name:req.session.username
-//         }
-//         next();
-//     }
-// });
+server.use('/auth',authRoutes);
+server.use(function(req,resp,next){
+    if(!(req.session.username&&req.session.password)){
+        resp.redirect("/auth/login");
+    }else{
+        resp.locals={
+            name:req.session.username
+        }
+        next();
+    }
+});
 
 server.use('/posts',postsRoutes);
 server.use('/users',usersRoutes);
