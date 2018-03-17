@@ -13,6 +13,67 @@ var orderModel = mongoose.model('orders');
 var uploadMid = multer({
     dest: "./public/imgs"
 });
+
+// checks 
+
+
+router.get('/checks', function (req, resp) {
+    userModel.find({}, function (err, result) {
+        if (!err) {
+            resp.render("admins/checks", {
+                data: result
+            });
+        } else {
+            resp.json(err);
+        }
+    });
+    
+  });
+  
+  
+  
+  router.get('/orderuser/:id',function(req,resp){
+    var usersarr;
+    userModel.find({_id:req.params.id},function(error,res){
+      if(!error){
+        usersarr=res;
+        orderModel.find({name:res[0].name},function(err,result){
+            if(!err){
+                //req.flash("msg","deleted");
+                userModel.find({},function(er,re) {
+                  if(!er){
+                    resp.render("admins/orderuser",{users:re,orders:result});
+                  }else{
+                    resp.json(er);
+                  }
+                })
+  
+            }else{
+                resp.json(err);
+            }
+        });
+      }else{
+        resp.json(error);
+      }
+    });
+  });
+  
+  
+  
+  router.get('/dateorder/:id',function(req,resp){
+    var usersarr;
+    orderModel.find({_id:req.params.id},function(error,res){
+      if(!error){
+         resp.render('admins/dateorder',{data:res})
+      }else{
+        resp.json(error);
+      }
+    });
+  });
+  
+  
+  
+
 router.get('/addUser', function (req, resp) {
     resp.render("admins/add_user");
 });
@@ -168,7 +229,8 @@ router.post('/addOrder', bodyParserJSON, function (req, res) {
                     totalprice: req.body.total,
                     date:Date.now(),
                     status: "inprocessing",
-                    ext: req.body.ext
+                    ext: req.body.ext,
+                    amount:req.body.amount
                     });
                     order.save(function(error,doc){
                         if(!error){

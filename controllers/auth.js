@@ -12,6 +12,7 @@ router.get('/login',function(req,resp){
 router.post('/login',bodyParserMid,function(req,resp){
     var username=req.body.username;
     var password=req.body.password;
+
     // userModel.find({name:username},function(err,result){
     //     if(!err){
     //          if(password.valueOf()==result[0].password.valueOf()){
@@ -19,7 +20,7 @@ router.post('/login',bodyParserMid,function(req,resp){
     //              req.session.username=result[0].name;
     //              req.session.password=result[0].password;
     //              if(result[0].type=="admin"){
-    //                 resp.redirect("/admin/allUsers");
+    //                 resp.redirect("/users/allOrders");
     //              }else{
     //                 resp.json("user");
     //              }
@@ -37,6 +38,7 @@ router.post('/login',bodyParserMid,function(req,resp){
         req.flash("msg","invalid username & password");
         resp.redirect("/auth/login");
     }
+
 });
 
 router.get('/register',function(req,resp){

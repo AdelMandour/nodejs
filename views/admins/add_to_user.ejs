@@ -9,7 +9,7 @@
             $(".products").one('click',function(){
                 //console.log(this.name);
                 $('#products').append("<label style='margin-right:2px;marign-left:-3px' class='component'> "+this.name+" </label>");
-                $('#products').append("<input id='I"+this.name+"'name='"+this.name+"' type='text' style='margin-right:2px' value='1'/>");
+                $('#products').append("<input id='I"+this.name+"'name='"+this.name+"' type='text' class='amount' style='margin-right:2px' value='1'/>");
                 $('#products').append("<button class='plus' name='"+this.name+"' style='margin-right:2px'> + </button>");
                 $('#products').append("<button class='mins' name='"+this.name+"' style='margin-right:2px'> - </button>");
                 $('#products').append("<label style='margin-right:2px' title='"+this.title+"' id='L"+this.name+"'>EGP "+this.title+" </label><br/>");
@@ -27,6 +27,7 @@
                 let totalPrice=parseInt($("#total").text().split(' ')[2]);
                 totalPrice+=price;
                 $("#total").text("Total price "+totalPrice);
+
             });
             $("#products").on('click','.mins',function(){
                 var text=parseInt($("#I"+this.name).val())
@@ -51,6 +52,10 @@
                  RoomNumber=$("select[name='myroom']").val();
                  orderuser=$("select[name='userorder']").val();
                  orderext=$("#ext").val();
+                 orderamount=0;
+                 $('.amount').each(function(i, obj) {
+                     orderamount+=parseInt(obj.value);
+                 });
                 //if(ordercomponents&&ordertotalprice&&ordernotes&&RoomNumber&&orderuser&&orderext){
                    // e.preventDefault();
                 //}else{
@@ -60,7 +65,7 @@
                     contentType:'application/json',
                     dataType:'json',
                     // send JSON data with request
-                    data:JSON.stringify({component:ordercomponents,total:ordertotalprice,note:ordernotes,room_numbers:RoomNumber,order_user:orderuser,ext:orderext}),
+                    data:JSON.stringify({component:ordercomponents,total:ordertotalprice,note:ordernotes,room_numbers:RoomNumber,order_user:orderuser,ext:orderext,amount:orderamount}),
                     complete: function() {
                         //called when complete
                         console.log('process complete');
@@ -68,7 +73,7 @@
                     success:function(response){
                         console.log(response);
                         console.log('process sucess');
-                        window.location = "http://localhost:8080/admin/orders";
+                        window.location = "http://localhost:8080/admin/checks";
                     },
                     error:function(error){
                         console.log(error);
@@ -98,7 +103,7 @@
                 <li><a href="/admin/addCategory">add Category</a></li>
                 <li><a href="/admin/addToUser">Manual Order</a></li>
                 <li><a href="/admin/orders">Orders</a></li>
-                <li><a href="#">Checks</a></li>
+                <li><a href="/admin/checks">Checks</a></li>
                 <li>
                     <a href="register.html">
                         <img class="profImg" src="/imgs/min3.jpg" />
@@ -161,7 +166,6 @@
                     </button>
                     </span>
                     <%})%>
-
                 </div>
                  </div>
             </div>
