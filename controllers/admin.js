@@ -13,6 +13,67 @@ var orderModel = mongoose.model('orders');
 var uploadMid = multer({
     dest: "./public/imgs"
 });
+
+// checks 
+
+
+router.get('/checks', function (req, resp) {
+    userModel.find({}, function (err, result) {
+        if (!err) {
+            resp.render("admins/checks", {
+                data: result
+            });
+        } else {
+            resp.json(err);
+        }
+    });
+    
+  });
+  
+  
+  
+  router.get('/orderuser/:id',function(req,resp){
+    var usersarr;
+    userModel.find({_id:req.params.id},function(error,res){
+      if(!error){
+        usersarr=res;
+        orderModel.find({name:res[0].name},function(err,result){
+            if(!err){
+                //req.flash("msg","deleted");
+                userModel.find({},function(er,re) {
+                  if(!er){
+                    resp.render("admins/orderuser",{users:re,orders:result});
+                  }else{
+                    resp.json(er);
+                  }
+                })
+  
+            }else{
+                resp.json(err);
+            }
+        });
+      }else{
+        resp.json(error);
+      }
+    });
+  });
+  
+  
+  
+  router.get('/dateorder/:id',function(req,resp){
+    var usersarr;
+    orderModel.find({_id:req.params.id},function(error,res){
+      if(!error){
+         resp.render('admins/dateorder',{data:res})
+      }else{
+        resp.json(error);
+      }
+    });
+  });
+  
+  
+  
+
 router.get('/addUser', function (req, resp) {
     resp.render("admins/add_user");
 });
@@ -206,58 +267,23 @@ router.get('/userDelete/:id',function(req,resp){
 });
 
 router.get('/orders',function(req,resp){
-  var arrcomponents=[];
     orderModel.find({},function(err,result){
-        if(!err){
-          result.forEach(function(ord,indx){
-            arrcomponents=ord.component.split(" ");
-          console.log(arrcomponents)
-          my=[];
-            arrcomponents.forEach(function(com){
-              if(com){
-                productModel.find({name:com},function(err,res){
-                  if(!err){
-                   //console.log(res);
-                    //ord.component=res;
-
-                      if(res){
-                        console.log("before push",typeof(my));
-                          my.push(res[0]);
-                          console.log("after push")
-                          console.log(my);
-                      }else{
-                        console.log("Hello")
-                      }
-
-                  }else {
-                    console.log("Hello Again");
-                  }
-                });
-              }
-            });
-            //result[indx].component = my;
-            console.log("Hi",ord.component,indx);
-          });
-          console.log(result);
-          //resp.render('admins/orders',{orders:result});
-        }else{
-            resp.json(err);
-        }
+        resp.render('admins/orders',{orders:result});
     });
 });
 
 
 
 
-/*router.get('/orders',function(req,resp){
-    orderModel.find({},function(err,result){
+router.get('/deliverOrder/:id',function(req,resp){
+    orderModel.update({_id:req.params.id},{$set:{status:"delivered"}},function(err,result){
         if(!err){
-            resp.render('admins/orders',{orders:result});
+            resp.redirect("/admin/orders");
         }else{
             resp.json(err);
         }
     });
 });
-*/
+
 
 module.exports = router;

@@ -19,7 +19,7 @@ router.post('/login',bodyParserMid,function(req,resp){
                  req.session.username=result[0].name;
                  req.session.password=result[0].password;
                  if(result[0].type=="admin"){
-                    resp.redirect("/users/allOrders");
+                    resp.redirect("/admin/orders");
                  }else{
                     resp.json("user");
                  }

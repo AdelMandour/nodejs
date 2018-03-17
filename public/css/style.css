@@ -44,7 +44,7 @@ li{display: inline;}
 #header ul li a{
     font-size: 16px;
     color: #b4bbc2;
-    margin-left: 20px;
+    margin-left: 11px;
 }
 .sign{
     background-color: #24aa98; color: #ffffff !important; padding: 7px; border-radius: 7px;
@@ -539,3 +539,40 @@ border: 0;
        height:40px;
 
      }
+    
+     
+#order-now form{
+    margin:35px 0px;
+  }
+  
+  #order-now form input{
+    font-size: 15px
+  }
+  
+  #order-now form label{
+    font-size: 20px
+  }
+  
+  #order-now form select{
+    padding:0px 50px;
+  }
+  
+  #order-now select option {
+      background: rgba(0, 0, 0, 0.3);
+      color: #fff;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  }
+  
+  #order-now select option:hover{
+    background: #ccc
+  }
+  
+  
+  #order-now form label, #order-now form select {
+    margin-right:30px;
+  }
+  
+  #order-now table td{
+    border-bottom: 1px solid #ccc
+  }
+  

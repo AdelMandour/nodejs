@@ -1,0 +1,155 @@
+
+<html>
+
+<head>
+    <title>CHECKS</title>
+    <link href="/css/style.css" rel="stylesheet" />
+    <script src="/js/jquery-3.2.1.js"></script>
+
+    <!-- end header -->
+    <script>
+
+          $(function(){
+              $(".plus").on('click',function(){
+
+                  $.ajax({
+                      url:'/admin/addOrder',
+                      type:"POST",
+                      contentType:'application/json',
+                      dataType:'json',
+                      // send JSON data with request
+                      data:JSON.stringify({}),
+                      complete: function() {
+                          //called when complete
+                          console.log('process complete');
+                        },
+                      success:function(response){
+                          console.log(response);
+                          console.log('process sucess');
+                          window.location = "http://localhost:8080/admin/checks";
+                      },
+                      error:function(error){
+                          console.log(error);
+                          console.log('process error');
+                      }
+                    })
+                 // }
+              });
+
+          })
+      </script>
+</head>
+
+<body>
+
+  <!-- start header -->
+  <div id="header">
+   <div id="header-container">
+          <a href="home.html" id="logo"><img src="/imgs/ka.png" alt="logo" width="70" height="70" /></a>
+          <input type="text" placeholder="search" />
+          <ul>
+            <li><a href="/admin/allProducts">Prouducts</a></li>
+            <li><a href="/admin/addProduct">add Prouduct</a></li>
+            <li><a href="/admin/allUsers">Users</a></li>
+            <li><a href="/admin/addUser">add User</a></li>
+            <li><a href="/admin/addRoom">add room</a></li>
+            <li><a href="/admin/addCategory">add Category</a></li>
+            <li><a href="/admin/addToUser">Manual Order</a></li>
+            <li><a href="/admin/orders">Orders</a></li>
+            <li><a href="/admin/checks">Checks</a></li>
+            <li>
+                <a href="register.html">
+                    <img class="profImg" src="/imgs/min3.jpg" />
+                </a>
+            </li>
+            <li><a href="/auth/logout" class="sign">Logout</a></li>
+            
+        </ul>
+    </div>
+  </div>
+  <!-- end header -->
+
+    <!-- start content-->
+    <div id="contact">
+        <div id="content-container">
+
+            <div id="order-now">
+                <h1 class="checksh1">CHECKS</h1>
+                <form>
+
+                  <select name="user">
+
+                      <option selected> select user</option>
+                    <% data.forEach(function(users){ %>
+                         <option> <%= users.name %> </option>
+                    <% }) %>
+                  </select>
+
+                <label>date from</label>
+                <input type="date" value="" name="date1" />
+                <label class="label2">date to</label>
+                <input type="date" value="" name="date2" />
+
+              </form>
+
+
+<!-- users table -->
+
+
+
+<!-- users order --->
+
+                    <table>
+
+                      <tr>
+
+                      <th>Name</th>
+                      </tr>
+
+                      <% data.forEach(function(users){ %>
+                      <tr>
+                                     <td>
+                                        <a  href="/admin/orderuser/<%= users._id %>" > + </a> <%= users.name %>
+                                     </td>
+                      <% }) %>
+
+                      </tr>
+
+                    </table>
+
+<!--
+<table>
+
+                  <tr>
+                    <th>
+
+                    </th>
+
+                    <th>
+
+                    </th>
+                  </tr>
+
+               </table>
+
+
+               <table class="product">
+                ``
+                 <tr>
+                   <td>
+
+                   <td>
+                      </tr>
+               </table>
+
+-->
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- start footer -->
+  <%include ../layouts/footer.ejs%>
+    <!-- end footer -->
