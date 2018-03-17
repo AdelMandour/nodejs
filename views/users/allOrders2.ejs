@@ -92,7 +92,18 @@ $(function(){
                                 <div class="accordion-section">
                                   <a class="accordion-section-title" href="#accordion-1"><%=user.date%></a>
                                   <div id="accordion-1" class="accordion-section-content">
-                                    <p> <%user.component%></p>
+                                    <p> </p>
+
+
+                                    <% user.component.forEach(function(comp){%>
+                                             
+                                        <span style="float:left" >
+                                               <p><%=comp.name %></p><br>
+                                        <img src="/imgs/<%=comp.image%>"/><br>
+                                       
+                                        <%=comp.price%><br>
+                                       </span>
+                                       <% }) %>
                                   </div><!--end .accordion-section-content-->
                                 </div><!--end .accordion-section-->
 

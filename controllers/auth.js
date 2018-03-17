@@ -20,7 +20,7 @@ router.post('/login',bodyParserMid,function(req,resp){
     //              req.session.username=result[0].name;
     //              req.session.password=result[0].password;
     //              if(result[0].type=="admin"){
-    //                 resp.redirect("/users/allOrders");
+    //                 resp.redirect("/admin/orders");
     //              }else{
     //                 resp.json("user");
     //              }
@@ -38,7 +38,6 @@ router.post('/login',bodyParserMid,function(req,resp){
         req.flash("msg","invalid username & password");
         resp.redirect("/auth/login");
     }
-
 });
 
 router.get('/register',function(req,resp){
