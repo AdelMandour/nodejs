@@ -1,4 +1,44 @@
-<%include ../layouts/header2.ejs%>
+<html>
+    
+
+    <head><title>Cafeteria</title>
+        <link href="/css/style.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="/css/demo.css">
+        <link href="/js/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" /><!--js css-->
+        <script src="/js/jquery-3.2.1.js"></script><!--script-->
+        <script src="/js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+        <script src="/js/ocr.js" ></script>
+        <script type="text/javascript" src="/js/accordion.js"></script>
+        </head>
+
+    <body>
+        <!-- start header -->
+        <div id="header">
+         <div id="header-container">
+                <a href="home.html" id="logo"><img src="/imgs/ka.png" alt="logo" width="70" height="70" /></a>
+                <input type="text" placeholder="search" />
+            <ul>
+                <li><a href="/order/add">Home</a></li>
+                
+              
+                <li><a href="/users/allOrders">My Orders</a></li>
+               
+                <li>
+                    <a href="register.html">
+                        <%=name %>
+                        <img class="profImg" src="/imgs/min3.jpg" />
+                    </a>
+                </li>
+                <li><a href="/auth/logout" class="sign">Logout</a></li>
+                
+            </ul>
+          </div>
+        </div>
+        <!-- end header -->
+        
+
+
+
 <script>
   
 
@@ -53,8 +93,28 @@ $(function(){
                                 <div class="accordion-section">
                                   <a class="accordion-section-title" href="#accordion-1"><%=user.date%></a>
                                   <div id="accordion-1" class="accordion-section-content">
-                                    <p> <%user.component[name]%> total price:<%=user.totalprice%></p>
-                                  </div><!--end .accordion-section-content-->
+                                     
+                                        
+                                        <p>
+                                            
+                                        </p>
+
+
+                                      
+                                       
+                                    
+                                        <% user.component.forEach(function(comp){%>
+                                             
+                                             <span style="float:left" >
+                                                    <p><%=comp.name %></p><br>
+                                             <img src="/imgs/<%=comp.image%>"/><br>
+                                            
+                                             <%=comp.price%><br>
+                                            </span>
+                                            <% }) %>
+                                  
+                                  
+                                    </div><!--end .accordion-section-content-->
                                 </div><!--end .accordion-section-->
 
                          </td>

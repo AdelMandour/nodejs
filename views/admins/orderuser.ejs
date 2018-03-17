@@ -1,0 +1,115 @@
+
+<html>
+
+<head>
+    <title>CHECKS</title>
+    <link href="/css/style.css" rel="stylesheet" />
+    <script src="/js/jquery-3.2.1.js"></script>
+
+    <!-- end header -->
+
+</head>
+
+<body>
+
+  <!-- start header -->
+  <div id="header">
+   <div id="header-container">
+          <a href="home.html" id="logo"><img src="/imgs/ka.png" alt="logo" width="70" height="70" /></a>
+          <input type="text" placeholder="search" />
+          <ul>
+
+            <li><a href="/admin/allProducts">Prouducts</a></li>
+            <li><a href="/admin/addProduct">add Prouduct</a></li>
+            <li><a href="/admin/allUsers">Users</a></li>
+            <li><a href="/admin/addUser">add User</a></li>
+            <li><a href="/admin/addRoom">add room</a></li>
+            <li><a href="/admin/addCategory">add Category</a></li>
+            <li><a href="/admin/addToUser">Manual Order</a></li>
+            <li><a href="/admin/orders">Orders</a></li>
+            <li><a href="/admin/checks">Checks</a></li>
+            <li>
+                <a href="register.html">
+                    <img class="profImg" src="/imgs/min3.jpg" />
+                </a>
+            </li>
+            <li><a href="/auth/logout" class="sign">Logout</a></li>
+        </ul>
+    </div>
+  </div>
+  <!-- end header -->
+
+    <!-- start content-->
+    <div id="contact">
+        <div id="content-container">
+
+            <div id="order-now">
+                <h1>CHECKS</h1>
+                <form>
+
+                  <select name="user">
+
+                      <option selected> select user</option>
+                    <% users.forEach(function(user){ %>
+                         <option> <%= user.name %> </option>
+                    <% }) %>
+                  </select>
+
+                <label>date from</label>
+                <input type="date" value="" name="date1" />
+                <label class="label2">date to</label>
+                <input type="date" value="" name="date2" />
+
+              </form>
+
+
+<!-- users table -->
+
+
+
+<!-- users order --->
+
+                    <table>
+
+                      <tr>
+
+                      <th>Order date</th>
+                      <th> price</th>
+                      <th> Amount</th>
+                      </tr>
+
+                      <% orders.forEach(function(order){ %>
+                      <tr>
+                        <td>
+                           <a href="/admin/dateorder/<%=order._id%>" > + </a> <%= order.date %>
+                        </td>
+                      
+
+
+
+                                     <td>
+                                        <%= order.totalprice %>
+                                     </td>
+                                      <td>
+                                        <%= order.amount %>
+                                     </td>
+                      <% }) %>
+
+                      </tr>
+
+                    </table>
+
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- start footer -->
+  <%include ../layouts/footer.ejs%>
+    <!-- end footer -->

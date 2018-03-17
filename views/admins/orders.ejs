@@ -9,7 +9,6 @@
                 <a href="home.html" id="logo"><img src="/imgs/ka.png" alt="logo" width="70" height="70" /></a>
                 <input type="text" placeholder="search" />
                 <ul>
-                        <li><a href="#">Home</a></li>
                         <li><a href="/admin/allProducts">Prouducts</a></li>
                         <li><a href="/admin/addProduct">add Prouduct</a></li>
                         <li><a href="/admin/allUsers">Users</a></li>
@@ -18,7 +17,7 @@
                         <li><a href="/admin/addCategory">add Category</a></li>
                         <li><a href="/admin/addToUser">Manual Order</a></li>
                         <li><a href="/admin/orders">Orders</a></li>
-                        <li><a href="#">Checks</a></li>
+                        <li><a href="/admin/checks">Checks</a></li>
                         <li>
                             <a href="register.html">
                                 <img class="profImg" src="/imgs/min3.jpg" />
@@ -37,37 +36,42 @@
                    <div id="order-now">
                     <form action="mailto:admin@gmail.com">
                        <table>
-                         <tr>
-                           <th>Order Date</th>
-                           <th>Name</th>
-                           <th>Room</th>
-                           <th>Ext</th>
-                           <th>Action</th>
-                         </tr>
                          <!-- start row-->
                          <%orders.forEach(function(order){%>
+                          <tr>
+                              <th>Order Date</th>
+                              <th>Name</th>
+                              <th>Room</th>
+                              <th>Ext</th>
+                              <th>Action</th>
+                              <th>total price</th>
+                            </tr>
                          <tr>
                            <td><%=order.date%></td>
                            <td><%=order.name%></td>
                            <td><%=order.room%></td>
                            <td><%=order.ext%></td>
-                           <td><a href="/admin/deliverOrder" class="sign">Deliver</a></td>
+                            <%if(order.status=="inprocessing"){%>
+                           <td><a href="/admin/deliverOrder/<%=order._id%>" class="sign">Deliver</a></td>
+                           <%}else{%>
+                            <td>Delivered</td>
+                            <%}%>
+                            <td><%=order.totalprice%></td>
                           </tr>
-                           <%})%>
-                           <hr>
-                           <%orders.forEach(function(order){%>
-                             <%order.component.forEach(function(item){%>
-                               <tr>
-                                 <td><img src="/imgs/<%=item.image%>"/></td>
-                                 <td><%=item.price%></td>
-                                 </tr>
-                                 <%})%>
-                                 <tr>
-                                    <td><%=order.totalprice%></td>
-                                 </tr>
+                           
 
-                         <%})%>
-
+                                 <th>product image</th>
+                                 <th>product name</th>
+                                 <th>product price</th>
+                                   <%order.component.forEach(function(com){%>
+                                    <tr>
+                                    <td><img src="/imgs/<%=com.image%>"/></td>
+                                    <td><%=com.name%></td>
+                                    <td><%=com.price%></td>
+                                  </tr>
+                                   <%})%>                                    
+                                 
+                          <%})%>
                        </table>
 
 
