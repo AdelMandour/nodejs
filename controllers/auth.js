@@ -21,7 +21,7 @@ router.post('/login',bodyParserMid,function(req,resp){
                  if(result[0].type=="admin"){
                     resp.redirect("/users/allOrders");
                  }else{
-                    resp.json("user");
+                    resp.redirect("/order/add");
                  }
              }
         }else{

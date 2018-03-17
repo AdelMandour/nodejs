@@ -65,7 +65,7 @@ sumOfNumberIteam=0;
 
      console.log(arr);
      console.log(sumOfNumberIteam );
-     $("#components").val(arr);
+    $("#components").value=arr;
      $("#mount").val(sumOfNumberIteam);
 
 });//select elem

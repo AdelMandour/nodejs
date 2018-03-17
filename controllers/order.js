@@ -51,21 +51,22 @@ mongoose.model('Rooms').find({}, function (err, result) {
 // });
 
 router.post('/add', uploadMid.single('image'), function (req, resp) {
-    var order = new orderModel({
-        name:req.session.username,
-        amount:req.body.amount,
-        component: req.body.component,
-        notes: req.body.notes,
-        room: req.body.room,
-        totalprice:req.body.totalprice
-    });
-    order.save(function (err, doc) {
-        if(!err) {
-            resp.redirect("/order/add");
-        } else {
-            resp.json(err);
-        }
-    });
+  console.log(req)
+    // var order = new orderModel({
+    //     name:req.session.username,
+    //     amount:req.body.amount,
+    //     component: req.body.component,
+    //     notes: req.body.notes,
+    //     room: req.body.room,
+    //     totalprice:req.body.totalprice
+    // });
+    // order.save(function (err, doc) {
+    //     if(!err) {
+    //         resp.redirect("/order/add");
+    //     } else {
+    //         resp.json(err);
+    //     }
+    // });
 
 });
 router.get('/list',function(req,resp){
